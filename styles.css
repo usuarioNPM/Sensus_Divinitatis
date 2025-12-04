@@ -1,0 +1,107 @@
+/* Configuración de Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+
+:root {
+    --sensus-dark: #004d61;
+    --sensus-light: #1a6b80;
+    --sensus-accent: #8cb369;
+    --sensus-cream: #f4f1ea;
+}
+
+/* --- REEMPLAZO DE CONFIGURACIÓN TAILWIND --- */
+
+/* Fuentes */
+.font-serif { font-family: 'Playfair Display', serif !important; }
+.font-sans { font-family: 'Lato', sans-serif !important; }
+
+/* Colores de Fondo */
+.bg-sensus-dark { background-color: var(--sensus-dark); }
+.bg-sensus-light { background-color: var(--sensus-light); }
+.bg-sensus-accent { background-color: var(--sensus-accent); }
+.bg-sensus-cream { background-color: var(--sensus-cream); }
+
+/* Colores de Texto */
+.text-sensus-dark { color: var(--sensus-dark); }
+.text-sensus-light { color: var(--sensus-light); }
+.text-sensus-accent { color: var(--sensus-accent); }
+
+/* Bordes */
+.border-sensus-dark { border-color: var(--sensus-dark); }
+.border-sensus-accent { border-color: var(--sensus-accent); }
+
+/* Variantes (Hover, Focus, Group) - Escapando los dos puntos de Tailwind */
+.hover\:bg-sensus-light:hover { background-color: var(--sensus-light); }
+.hover\:bg-sensus-accent:hover { background-color: var(--sensus-accent); }
+.hover\:text-white:hover { color: #ffffff; }
+
+.hover\:text-sensus-light:hover { color: var(--sensus-light); }
+
+.focus\:ring-sensus-light:focus {
+    --tw-ring-color: var(--sensus-light);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
+.group:hover .group-hover\:text-sensus-light { color: var(--sensus-light); }
+
+/* --- ESTILOS PREVIOS --- */
+
+/* Patrón de fondo de libros */
+.book-pattern {
+  background-color: var(--sensus-cream);
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 10c-2 0-4 1-5 3-1-2-3-3-5-3s-4 1-5 3v15c1-2 3-3 5-3s3 1 5 3c2-2 4-3 5-3s4 1 5 3V13c-1-2-3-3-5-3z' fill='%23004d61' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+/* Utilidad para ocultar elementos (usado en filtros y modales) */
+.hidden {
+    display: none !important;
+}
+
+/* Animaciones simples */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Estilos para el Modal del Chat */
+.chat-message-user {
+    background-color: var(--sensus-dark);
+    color: white;
+    border-bottom-right-radius: 0;
+    margin-left: auto;
+}
+
+.chat-message-ai {
+    background-color: #e5e7eb;
+    color: #1f2937;
+    border-bottom-left-radius: 0;
+    margin-right: auto;} este es style mete el fondo  
+
+/* ------------------------------------------------------------------- */
+/* ----------------------  FONDO RESPONSIVE  -------------------------- */
+/* ------------------------------------------------------------------- */
+
+body {
+    background-image: url("imagenes/ft.png");
+    background-repeat: repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 50%; /* Escritorio */
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+    body {
+        background-size: 70%;
+    }
+}
+
+/* Celulares */
+@media (max-width: 640px) {
+    body {
+        background-size: 120%;
+    }
+}
