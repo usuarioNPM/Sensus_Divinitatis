@@ -1,0 +1,102 @@
+/* ------------------ CONFIGURACIÓN DE FUENTES ----------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+
+/* Variables de colores */
+:root {
+    --sensus-dark: #004d61;
+    --sensus-light: #1a6b80;
+    --sensus-accent: #03858f;
+    --sensus-cream: #f2f6fc;
+}
+
+/* Fuentes */
+.font-serif { font-family: 'Playfair Display', serif !important; }
+.font-sans  { font-family: 'Lato', sans-serif !important; }
+
+/* ------------------------------------------------------------- */
+/* ------------------ COLORES PERSONALIZADOS ------------------- */
+/* ------------------------------------------------------------- */
+
+/* Fondos */
+.bg-sensus-dark   { background-color: var(--sensus-dark); }
+.bg-sensus-light  { background-color: var(--sensus-light); }
+.bg-sensus-accent { background-color: var(--sensus-accent); }
+.bg-sensus-cream  { background-color: var(--sensus-cream); }
+
+/* Textos */
+.text-sensus-dark   { color: var(--sensus-dark); }
+.text-sensus-light  { color: var(--sensus-light); }
+.text-sensus-accent { color: var(--sensus-accent); }
+
+/* Bordes */
+.border-sensus-dark   { border-color: var(--sensus-dark); }
+.border-sensus-accent { border-color: var(--sensus-accent); }
+
+/* ------------------------------------------------------------- */
+/* ------------------ FONDO RESPONSIVE ---------------------- */
+/* ------------------------------------------------------------- */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url("imagenes/fondooficial.png")  !important; 
+    background-repeat: repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 50%;
+    background-color: transparent;
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+    body {
+        background-size: 70%;
+    }
+}
+
+/* Celulares */
+@media (max-width: 640px) {
+    body {
+        background-size: 120%;
+    }
+}
+
+/* ------------------------------------------------------------- */
+/* ------------------ SCROLLBAR PERSONALIZADO ------------------ */
+/* ------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--sensus-cream);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--sensus-accent);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--sensus-light);
+}
+
+/* ------------------------------------------------------------- */
+/* ------------------ AJUSTES COMPLEMENTARIOS ------------------ */
+/* ------------------------------------------------------------- */
+
+/* Ocultar iconos del menú móvil pre-dibujados (lucide corrige luego) */
+nav svg {
+    stroke-width: 2.2;
+}
+
+/* Para evitar saltos cuando aparece el menú móvil */
+#mobile-menu {
+    transition: all 0.25s ease-in-out;
+}
