@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda - Sensus Divinitatis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="estilos.css">
+  
+</head>
+<body class="font-sans text-gray-800 flex flex-col min-h-screen bg-oficial book-pattern">
+    <nav class="bg-white/90 backdrop-blur-sm text-sensus-dark sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-24">
+            
+            <div class="flex-shrink-0">
+                <a href="index.html" class="flex items-center gap-2">
+                    <img src="imagenes/logo.png" alt="Sensus Divinitatis" class="h-20 w-auto object-contain py-2" />
+                </a>
+            </div>
+
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="index.html" class="text-gray-600 hover:bg-sensus-light hover:text-white px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                    <a href="nosotros.html" class="text-gray-600 hover:bg-sensus-light hover:text-white px-3 py-2 rounded-md text-sm font-medium">Nosotros</a>
+                    <a href="eventos.html" class="text-gray-600 hover:bg-sensus-light hover:text-white px-3 py-2 rounded-md text-sm font-medium">Eventos</a>
+                    <a href="tienda.html" class="bg-sensus-dark text-white px-3 py-2 rounded-md text-sm font-medium">Tienda</a>
+                    <a href="contactenos.html" class="text-gray-600 hover:bg-sensus-light hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contáctenos</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button id="cart-trigger" class="relative p-2 text-sensus-dark hover:bg-gray-100 rounded-full transition-colors">
+                    <i data-lucide="shopping-cart" class="h-6 w-6"></i>
+                    <span id="cart-count-nav" class="absolute -top-1 -right-1 bg-sensus-accent text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
+                </button>
+
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-sensus-dark hover:bg-sensus-light hover:text-white focus:outline-none transition-all">
+                        <i data-lucide="menu" id="menu-icon-open" class="h-6 w-6"></i>
+                        <i data-lucide="x" id="menu-icon-close" class="h-6 w-6 hidden"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-inner">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="index.html" class="text-gray-600 hover:bg-sensus-light hover:text-white block px-3 py-2 rounded-md text-base font-medium">Inicio</a>
+            <a href="nosotros.html" class="text-gray-600 hover:bg-sensus-light hover:text-white block px-3 py-2 rounded-md text-base font-medium">Nosotros</a>
+            <a href="eventos.html" class="text-gray-600 hover:bg-sensus-light hover:text-white block px-3 py-2 rounded-md text-base font-medium">Eventos</a>
+            <a href="tienda.html" class="bg-sensus-dark text-white block px-3 py-2 rounded-md text-base font-medium">Tienda</a>
+            <a href="contactenos.html" class="text-gray-600 hover:bg-sensus-light hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contáctenos</a>
+        </div>
+    </div>
+</nav>
+<main class="flex-grow w-full">
+        <div class="bg-white/80 backdrop-blur-sm py-6 px-4 shadow-sm">
+            <div class="max-w-4xl mx-auto relative">
+                <input id="shop-search" type="text" placeholder="Buscar por título, autor o categoría..." class="w-full border-2 border-sensus-dark rounded-full py-3 px-12 text-lg focus:outline-none">
+                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-sensus-dark"></i>
+            </div>
+        </div>
+
+        <div class="bg-sensus-dark text-white h-48 flex items-center justify-center relative overflow-hidden">
+             <div class="text-center z-10">
+                <h2 class="text-4xl font-serif mb-2">Catálogo de Libros</h2>
+                <p class="text-sensus-accent font-sans text-sm tracking-widest uppercase">Explora nuestra colección</p>
+             </div>
+        </div>
+
+        <div class="py-10 bg-white/20 backdrop-blur-md border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-3 overflow-x-auto pb-4 md:pb-0 no-scrollbar">
+                    
+                    <button class="filter-btn flex-shrink-0 px-5 py-2 rounded-full border-2 border-sensus-dark bg-sensus-dark text-white font-bold text-xs uppercase tracking-wider transition-all" data-filter="todos">
+                        Todos
+                    </button>
+                    
+                    <button class="filter-btn flex-shrink-0 px-5 py-2 rounded-full border-2 border-sensus-dark text-sensus-dark font-bold text-xs uppercase tracking-wider transition-all hover:bg-sensus-dark hover:text-white" data-filter="Teología">
+                        Teología
+                    </button>
+                    
+                    <button class="filter-btn flex-shrink-0 px-5 py-2 rounded-full border-2 border-sensus-dark text-sensus-dark font-bold text-xs uppercase tracking-wider transition-all hover:bg-sensus-dark hover:text-white" data-filter="Vida Cristiana">
+                        Vida Cristiana
+                    </button>
+                    
+                    <button class="filter-btn flex-shrink-0 px-5 py-2 rounded-full border-2 border-sensus-dark text-sensus-dark font-bold text-xs uppercase tracking-wider transition-all hover:bg-sensus-dark hover:text-white" data-filter="Biblia">
+                        Biblia
+                    </button>
+                    
+                    <button class="filter-btn flex-shrink-0 px-5 py-2 rounded-full border-2 border-sensus-dark text-sensus-dark font-bold text-xs uppercase tracking-wider transition-all hover:bg-sensus-dark hover:text-white" data-filter="Historia">
+                        Historia
+                    </button>
+                    
+                    <button class="filter-btn flex-shrink-0 px-5 py-2 rounded-full border-2 border-sensus-dark text-sensus-dark font-bold text-xs uppercase tracking-wider transition-all hover:bg-sensus-dark hover:text-white" data-filter="Apologética">
+                        Apologética
+                    </button>
+                    
+                    <button class="filter-btn flex-shrink-0 px-5 py-2 rounded-full border-2 border-sensus-dark text-sensus-dark font-bold text-xs uppercase tracking-wider transition-all hover:bg-sensus-dark hover:text-white" data-filter="Misionología">
+                        Misionología
+                    </button>
+
+                    <button class="filter-btn flex-shrink-0 px-5 py-2 rounded-full border-2 border-sensus-dark text-sensus-dark font-bold text-xs uppercase tracking-wider transition-all hover:bg-sensus-dark hover:text-white" data-filter="Eclesiología">
+                        Eclesiología
+                    </button>
+                </div>
+            </div>
+        </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const books = document.querySelectorAll('.product-card');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Convertimos a minúsculas para evitar errores de "Biblia" vs "biblia"
+            const filter = button.getAttribute('data-filter').toLowerCase();
+
+            // 1. Gestionar estado visual de botones
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-sensus-dark', 'text-white');
+                btn.classList.add('text-sensus-dark');
+            });
+            button.classList.remove('text-sensus-dark');
+            button.classList.add('bg-sensus-dark', 'text-white');
+
+            // 2. Filtrar libros sin deformarlos
+            books.forEach(book => {
+                // Convertimos la categoría del libro a minúscula para comparar
+                const category = book.getAttribute('data-category').toLowerCase();
+                
+                if (filter === 'todos' || filter === category) {
+                    book.classList.remove('hidden'); // Lo mostramos
+                } else {
+                    book.classList.add('hidden');    // Lo ocultamos por completo
+                }
+            });
+        });
+    });
+});
+</script>
+
+        <section class="py-16 px-4 md:px-12 lg:px-24 w-full">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-8">
+                    <h2 class="text-3xl font-serif text-sensus-dark">Libros Disponibles</h2>
+                    <span id="products-count" class="text-sm text-gray-500">resultados</span>
+                </div>
+
+                <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+                    
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Biblia" 
+                         data-title="Biblia de Referencia Thompson"
+                         data-description="¿Imaginas una Biblia que se explique a sí misma sin opiniones humanas? El Dr. Thompson dedicó su vida a crear un sistema de cadenas que conecta más de 100,000 versículos. Es el mapa definitivo para el buscador que desea navegar por las profundidades de la Palabra de Dios sin perderse en comentarios externos."
+                         data-img-front="imagenes/tienda/15.png"
+                         data-img-back="imagenes/contraportadas/15.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/15.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">250 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-xs md:text-sm h-10 overflow-hidden">Biblia de Referencia Thompson</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Edición Milenio</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs hover:bg-sensus-accent transition-all flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Teología" 
+                         data-title="El Evangelio Explícito"
+                         data-description="Estamos matando al cristianismo con una religión de 'buenos modales' y hemos olvidado el mensaje que realmente tiene poder para resucitar muertos. Matt Chandler lanza una advertencia urgente: hemos hecho del evangelio algo implícito, y al hacerlo, lo hemos perdido por completo."
+                         data-img-front="imagenes/tienda/8.png"
+                         data-img-back="imagenes/contraportadas/8.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/8.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">75 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">El Evangelio Explícito</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Matt Chandler</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs hover:bg-sensus-accent transition-all flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Teología" 
+                         data-title="Cómo nos llegaron las Sagradas Escrituras" 
+                         data-description="¿Cómo sobrevivió el texto bíblico a través de incendios, guerras y el paso de los milenios? Este libro te sumerge en el fascinante viaje de los manuscritos antiguos y la formación del canon. Descubre la mano invisible de Dios preservando Su Palabra frente a todos los intentos humanos por destruirla." 
+                         data-img-front="imagenes/tienda/9.png" 
+                         data-img-back="imagenes/contraportadas/9.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/9.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-gray-400 text-white font-bold text-xs px-2 py-1 rounded price-tag">Consultar</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">Cómo nos llegaron las Escrituras</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Christian M. Mcshaffrey</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs hover:bg-sensus-accent transition-all flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Historia" 
+                         data-title="La Gloria de una Verdadera Iglesia" 
+                         data-description="Escrito en las sombras de la persecución del siglo XVII, este es el grito de supervivencia de una iglesia que se negaba a morir. Benjamin Keach revela los secretos de una comunidad que halló en la disciplina y el amor mutuo la fuerza para enfrentar imperios. Descubre cómo luce una iglesia que vibra realmente." 
+                         data-img-front="imagenes/tienda/2.png" 
+                         data-img-back="imagenes/contraportadas/2.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/2.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-gray-400 text-white font-bold text-xs px-2 py-1 rounded price-tag">Consultar</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">La Gloria de una Verdadera Iglesia</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Benjamin Keach</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Teología" 
+                         data-title="Los Atributos de Dios" 
+                         data-description="No puedes amar a alguien que no conoces realmente. Arthur Pink te lleva a las profundidades del carácter de Dios: Su soberanía absoluta, Su santidad aterradora y Su amor infinito. Prepárate para una experiencia devocional que sacudirá tu paz mental al contemplar la grandeza del Dueño del universo." 
+                         data-img-front="imagenes/tienda/5.png" 
+                         data-img-back="imagenes/contraportadas/5.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/5.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-gray-400 text-white font-bold text-xs px-2 py-1 rounded price-tag">Consultar</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">Los Atributos de Dios</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Arthur W. Pink</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Apologética" 
+                         data-title="El Libro de las Respuestas" 
+                         data-description="¿De dónde salieron los dinosaurios? ¿Qué dice la Biblia sobre los OVNIs? Ken Ham no esquiva las preguntas difíciles; las confronta con una lógica implacable y datos científicos. Si buscas respuestas reales para proteger tu fe en un mundo escéptico y lleno de dudas, este libro es tu mejor aliado." 
+                         data-img-front="imagenes/tienda/6.png" 
+                         data-img-back="imagenes/contraportadas/6.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/6.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">25 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">El Libro de las Respuestas</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Ken Ham</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Vida Cristiana" 
+                         data-title="Hombres Fuertes en Tiempos Difíciles" 
+                         data-description="El mundo enfrenta una crisis de identidad masculina. Ed Cole lanza un desafío directo al corazón del hombre: recuperar el liderazgo espiritual con integridad y valentía. Un manual de combate para tiempos donde la tibieza ya no es una opción." 
+                         data-img-front="imagenes/tienda/16.png" 
+                         data-img-back="imagenes/contraportadas/16.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/16.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">40 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">Hombres Fuertes Tiempos Difíciles</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Ed Cole</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Historia" 
+                         data-title="Historia de la Iglesia Cristiana" 
+                         data-description="Dos mil años de luchas, incendios, traiciones y triunfos épicos narrados de forma cinematográfica. Jesse Lyman Hurlbut te muestra cómo un pequeño grupo de creyentes cambió el curso de la humanidad. Si quieres entender por qué el cristianismo sigue en pie hoy, tienes que conocer este relato." 
+                         data-img-front="imagenes/tienda/4.png" 
+                         data-img-back="imagenes/contraportadas/4.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/4.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">120 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">Historia de la Iglesia Cristiana</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Jesse Lyman Hurlbut</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Vida Cristiana" 
+                         data-title="Perfil de la Necesidad" 
+                         data-description="Todos sentimos un vacío, pero ¿sabemos identificarlo? Antonio Pérez Sobrino realiza una radiografía del alma humana, catalogando nuestras necesidades más profundas con precisión quirúrgica. Un viaje introspectivo hacia la única solución capaz de satisfacer tu inquietud existencial." 
+                         data-img-front="imagenes/tienda/7.png" 
+                         data-img-back="imagenes/contraportadas/7.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/7.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">20 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">Perfil de la Necesidad</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Antonio Pérez Sobrino</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Historia" 
+                         data-title="La Reforma Radical" 
+                         data-description="Más allá de Lutero y Calvino, existieron grupos que buscaban una transformación tan extrema que fueron perseguidos por todos. Bernardo Campos explora las raíces de este movimiento y su inesperada conexión con la espiritualidad vibrante del pentecostalismo actual." 
+                         data-img-front="imagenes/tienda/3.png" 
+                         data-img-back="imagenes/contraportadas/3.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/3.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">130 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">La Reforma Radical</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Bernardo Campos</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Teología" 
+                         data-title="El Evangelio para Todos los Hombres" 
+                         data-description="En medio de debates teológicos estériles, Andrew Fuller lanza una defensa apasionada: el evangelio es una oferta libre y universal. Un libro que cambió el curso de las misiones modernas y que te recordará la urgencia de compartir la gracia sin fronteras." 
+                         data-img-front="imagenes/tienda/11.png" 
+                         data-img-back="imagenes/contraportadas/11.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/11.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">120 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">Evangelio para Todos los Hombres</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Andrew Fuller</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Apologética" 
+                         data-title="El Caso de Cristo" 
+                         data-description="Un periodista de investigación escéptico se propone destruir el cristianismo analizando las pruebas históricas de la resurrección. El resultado es un viaje fascinante a través de evidencias arqueológicas y testimoniales que te dejarán sin aliento. ¿Qué encontró Lee Strobel que cambió su vida para siempre?" 
+                         data-img-front="imagenes/tienda/14.png" 
+                         data-img-back="imagenes/contraportadas/14.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/14.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">110 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">El Caso de Cristo</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Lee Strobel</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Teología" 
+                         data-title="Los Cinco Puntos del Amilenarismo" 
+                         data-description="¿Qué pasará realmente al final de los tiempos? Jeffrey Johnson despeja la niebla de las teorías futuristas complejas para ofrecer una visión bíblica clara y esperanzadora sobre el reinado de Cristo y Su venida gloriosa. La escatología nunca fue tan accesible." 
+                         data-img-front="imagenes/tienda/17.png" 
+                         data-img-back="imagenes/contraportadas/17.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/17.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">70 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">Cinco Puntos del Amilenarismo</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Jeffrey D. Johnson</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Misionología" 
+                         data-title="Una Fe que se Indigeniza" 
+                         data-description="¿Puede un pueblo subyugado abrazar una fe nueva sin perder su esencia? Marcelo Vargas revela el vigor de los aimaras, quienes han logrado que el evangelio se sienta 'en casa' en su propia cultura. Una historia de resistencia e identidad que desafía todo lo que creías saber sobre la fe en los Andes." 
+                         data-img-front="imagenes/tienda/1.png" 
+                         data-img-back="imagenes/contraportadas/1.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/1.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-gray-400 text-white font-bold text-xs px-2 py-1 rounded price-tag">Consultar</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">Una Fe que se Indigeniza</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Marcelo Vargas A.</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Historia" 
+                         data-title="Confesando la Fe en 1644 y 1689" 
+                         data-description="Sumérgete en los documentos que definieron la identidad bautista en medio del fuego. Este estudio de James Renihan no es solo historia; es una brújula doctrinal para tiempos de confusión, rescatando verdades por las que hombres y mujeres estuvieron dispuestos a darlo todo." 
+                         data-img-front="imagenes/tienda/12.png" 
+                         data-img-back="imagenes/contraportadas/12.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/12.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">50 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">Confesando la Fe 1644 y 1689</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">James M. Renihan</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Apologética" 
+                         data-title="Preguntas difíciles sobre el cristianismo" 
+                         data-description="¿Alguna vez te has quedado sin palabras ante una pregunta punzante sobre tu fe? Este no es un libro de teoría abstracta; es un manual de supervivencia intelectual. En un mundo que cuestiona la veracidad de la Biblia y la exclusividad de Cristo, este folleto destila las 10 dudas más feroces y las responde con claridad y valentía. Como bien dice Josh McDowell: la fe no teme al intelecto. Si buscas respuestas sólidas para mentes curiosas —o para tu propia paz mental—, estas páginas son el punto de partida perfecto." 
+                         data-img-front="imagenes/tienda/10.png" 
+                         data-img-back="imagenes/contraportadas/10.png">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/10.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">150 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">Preguntas difíciles sobre el cristianismo</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">Jessica Curiel</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl overflow-hidden shadow-md group" 
+                         data-category="Eclesiología" 
+                         data-title="La vida asociativa de la Iglesia" 
+                         data-description="Vivimos en la era del 'cristianismo independiente', donde cada iglesia es una isla y cada creyente un náufrago. Pero, ¿y si te dijera que estamos perdiendo el poder que los antiguos padres de la fe sí tenían? Este libro rescata un secreto olvidado en los sótanos de la historia: el diseño original de la conexión entre iglesias. James M. Renihan desentierra la sabiduría del siglo XVII para recordarnos que la independencia total no es libertad, es debilidad. Descubre cómo la verdadera fuerza de la Iglesia no está en lo que hace sola, sino en cómo se une. No vuelvas a ver a tu congregación de la misma manera." 
+                         data-img-front="imagenes/tienda/13.png" 
+                         data-img-back="">
+                        <div class="p-4 relative">
+                            <div class="h-48 md:h-56 overflow-hidden rounded-lg"><img src="imagenes/tienda/13.png" class="w-full h-full object-cover"></div>
+                            <div class="absolute top-6 right-6 bg-sensus-accent text-white font-bold text-xs px-2 py-1 rounded price-tag">95 Bs</div>
+                        </div>
+                        <div class="px-4 pb-6 text-center">
+                            <h3 class="font-bold text-sensus-dark text-sm h-10 overflow-hidden">La vida asociativa de la Iglesia</h3>
+                            <p class="text-[10px] text-gray-500 mb-3 italic">James M. Renihan</p>
+                            <button class="add-to-cart-btn w-full bg-sensus-dark text-white py-2 rounded-lg text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+
+ 
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="detail-modal" class="fixed inset-0 z-[110] hidden flex items-center justify-center p-2 md:p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" id="detail-overlay"></div>
+        <div class="bg-white w-full max-w-4xl max-h-[95vh] md:max-h-[85vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row relative z-10">
+            <button id="close-detail" class="absolute top-3 right-3 z-30 bg-white/90 rounded-full p-2 shadow-md">
+                <i data-lucide="x" class="w-5 h-5 text-sensus-dark"></i>
+            </button>
+            <div class="w-full md:w-1/2 bg-gray-100 p-4 md:p-6 overflow-y-auto custom-scroll border-b md:border-b-0 md:border-r">
+                <div class="flex flex-col gap-6">
+                    <div class="text-center">
+                        <span class="text-[9px] uppercase tracking-widest font-black text-gray-400">Portada</span>
+                        <img id="modal-img-front" src="" class="w-full h-auto rounded-lg mt-2 shadow-lg">
+                    </div>
+                    <div class="text-center">
+                        <span class="text-[9px] uppercase tracking-widest font-black text-gray-400">Contraportada</span>
+                        <img id="modal-img-back" src="" class="w-full h-auto rounded-lg mt-2 shadow-lg">
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col overflow-y-auto custom-scroll">
+                <span id="modal-category" class="text-sensus-accent text-xs font-bold uppercase"></span>
+                <h2 id="modal-title" class="text-2xl md:text-3xl font-serif text-sensus-dark mt-1 mb-4 leading-tight"></h2>
+                <div class="flex-grow">
+                    <h4 class="text-sm font-bold text-gray-700 mb-2">Prólogo:</h4>
+                    <p id="modal-description" class="text-gray-600 text-sm leading-relaxed italic"></p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-gray-100">
+                    <div id="modal-price" class="text-3xl font-bold text-sensus-dark mb-4"></div>
+                    <button id="modal-add-btn" class="w-full bg-sensus-dark hover:bg-sensus-accent text-white py-4 rounded-xl font-bold transition-all">
+                        Añadir al Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="cart-modal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/50" id="cart-overlay"></div>
+        <div class="absolute right-0 top-0 w-full max-w-md h-full bg-white shadow-2xl flex flex-col animate-slide-in">
+            <div class="p-6 border-b flex justify-between items-center bg-sensus-dark text-white">
+                <h2 class="text-xl font-bold flex items-center gap-2"><i data-lucide="shopping-bag"></i> Mi Pedido</h2>
+                <button id="close-cart"><i data-lucide="x"></i></button>
+            </div>
+            <div id="cart-items-container" class="flex-grow overflow-y-auto p-6 space-y-4"></div>
+            <div class="p-6 border-t bg-gray-50">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-600 font-bold">Total a pagar:</span>
+                    <span id="cart-total" class="text-2xl font-bold text-sensus-dark">0 Bs</span>
+                </div>
+                <button id="btn-whatsapp" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-green-700 transition-all">
+                    <i data-lucide="send"></i> Confirmar pedido por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+   <script>
+lucide.createIcons();
+let cart = JSON.parse(localStorage.getItem('sensus_cart')) || [];
+
+// === FUNCIONES DE MODAL DETALLES ===
+const detailModal = document.getElementById('detail-modal');
+
+document.getElementById('product-grid').addEventListener('click', (e) => {
+    const card = e.target.closest('.product-card');
+    const isAddBtn = e.target.closest('.add-to-cart-btn');
+
+    if (card && !isAddBtn) {
+        document.getElementById('modal-title').innerText = card.dataset.title;
+        document.getElementById('modal-category').innerText = card.dataset.category;
+        document.getElementById('modal-description').innerText = card.dataset.description;
+        document.getElementById('modal-img-front').src = card.dataset.imgFront;
+        document.getElementById('modal-img-back').src = card.dataset.imgBack;
+        document.getElementById('modal-price').innerText = card.querySelector('.price-tag').innerText;
+        
+        document.getElementById('modal-add-btn').onclick = () => {
+            addToCart(card);
+            detailModal.classList.add('hidden');
+        };
+        detailModal.classList.remove('hidden');
+    }
+});
+
+document.getElementById('close-detail').onclick = () => detailModal.classList.add('hidden');
+document.getElementById('detail-overlay').onclick = () => detailModal.classList.add('hidden');
+
+// === FUNCIONES DE CARRITO ===
+function updateCartUI() {
+    const container = document.getElementById('cart-items-container');
+    if (!container) return;
+    container.innerHTML = '';
+    let total = 0, count = 0;
+
+    cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        count += item.quantity;
+        container.innerHTML += `
+            <div class="flex items-center gap-4 bg-white p-3 rounded-lg border shadow-sm">
+                <img src="${item.img}" class="w-12 h-16 object-cover rounded">
+                <div class="flex-grow">
+                    <h4 class="text-xs font-bold text-sensus-dark">${item.title}</h4>
+                    <p class="text-xs text-sensus-accent">${item.price} Bs</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <button onclick="changeQty(${index}, -1)" class="px-2 border rounded">-</button>
+                        <span class="text-xs font-bold">${item.quantity}</span>
+                        <button onclick="changeQty(${index}, 1)" class="px-2 border rounded">+</button>
+                    </div>
+                </div>
+                <button onclick="removeItem(${index})" class="text-red-400 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+            </div>`;
+    });
+
+    document.getElementById('cart-total').innerText = total + " Bs";
+    document.getElementById('cart-count-nav').innerText = count;
+    localStorage.setItem('sensus_cart', JSON.stringify(cart));
+    lucide.createIcons();
+}
+
+function addToCart(card) {
+    const title = card.dataset.title;
+    const img = card.dataset.imgFront;
+    const priceText = card.querySelector('.price-tag').innerText;
+    const priceVal = parseInt(priceText);
+
+    if (isNaN(priceVal)) {
+        alert("Consulta disponibilidad por WhatsApp");
+        return;
+    }
+
+    const existing = cart.find(i => i.title === title);
+    if (existing) existing.quantity++;
+    else cart.push({ title, price: priceVal, img, quantity: 1 });
+
+    updateCartUI();
+    document.getElementById('cart-modal').classList.remove('hidden');
+}
+
+window.changeQty = (i, d) => {
+    cart[i].quantity += d;
+    if (cart[i].quantity < 1) cart.splice(i, 1);
+    updateCartUI();
+};
+
+window.removeItem = (i) => {
+    cart.splice(i, 1);
+    updateCartUI();
+};
+
+// Listeners adicionales
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.add-to-cart-btn');
+    if (btn) addToCart(btn.closest('.product-card'));
+});
+
+document.getElementById('cart-trigger').onclick = () => document.getElementById('cart-modal').classList.remove('hidden');
+document.getElementById('close-cart').onclick = () => document.getElementById('cart-modal').classList.add('hidden');
+document.getElementById('cart-overlay').onclick = () => document.getElementById('cart-modal').classList.add('hidden');
+
+document.getElementById('btn-whatsapp').onclick = () => {
+    if (cart.length === 0) return alert("Carrito vacío");
+    let msg = "¡Hola Sensus Divinitatis! Quisiera estos libros:\n\n";
+    cart.forEach(i => msg += `• ${i.title} (x${i.quantity}) - ${i.price * i.quantity} Bs\n`);
+    msg += `\n*Total: ${document.getElementById('cart-total').innerText}*`;
+    window.open(`https://wa.me/59169669611?text=${encodeURIComponent(msg)}`, '_blank');
+};
+
+document.getElementById('shop-search').addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase();
+    let v = 0;
+    document.querySelectorAll('.product-card').forEach(p => {
+        const match = p.dataset.title.toLowerCase().includes(q) || p.dataset.category.toLowerCase().includes(q);
+        p.style.display = match ? '' : 'none';
+        if (match) v++;
+    });
+    document.getElementById('products-count').innerText = `${v} resultados`;
+});
+
+updateCartUI();
+
+// ... (navegador) ...
+
+// Función unificada para inicializar todo al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Cargar Carrito
+    updateCartUI();
+
+    // 2. Control del Menú Móvil
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+
+    if (btn && menu) {
+        btn.onclick = () => {
+            menu.classList.toggle('hidden');
+            if (iconOpen && iconClose) {
+                iconOpen.classList.toggle('hidden');
+                iconClose.classList.toggle('hidden');
+            }
+        };
+    }
+
+    // 3. Inicializar Lucide por primera vez
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+});
+</script>
+</body>
+</html>

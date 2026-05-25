@@ -1,0 +1,189 @@
+/* ------------------ CONFIGURACIÓN DE FUENTES ----------------- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+
+/* Variables de colores */
+:root {
+    --sensus-dark: #004d61;
+    --sensus-light: #1a6b80;
+    --sensus-accent: #03858f;
+    --sensus-cream: #f2f6fc;
+}
+
+/* Fuentes */
+.font-serif { font-family: 'Playfair Display', serif !important; }
+.font-sans  { font-family: 'Lato', sans-serif !important; }
+
+/* ------------------ COLORES PERSONALIZADOS ------------------- */
+.bg-sensus-dark   { background-color: var(--sensus-dark); }
+.bg-sensus-light  { background-color: var(--sensus-light); }
+.bg-sensus-accent { background-color: var(--sensus-accent); }
+.bg-sensus-cream  { background-color: var(--sensus-cream); }
+
+.text-sensus-dark   { color: var(--sensus-dark); }
+.text-sensus-light  { color: var(--sensus-light); }
+.text-sensus-accent { color: var(--sensus-accent); }
+
+.border-sensus-dark   { border-color: var(--sensus-dark); }
+.border-sensus-accent { border-color: var(--sensus-accent); }
+
+/* ------------------ FONDOS POR PÁGINA ------------------ */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* 🔵 INDEX - fondo variado */
+body.bg-index {
+    background-image: url("imagenes/fondovariado.png");
+    background-repeat: repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 50%;
+}
+
+/* 🟢 OFICIAL */
+body.bg-oficial {
+    background-image: url("imagenes/fondooficial.png");
+    background-repeat: repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 50%;
+}
+
+/* 🌥 NUBES */
+body.bg-nubes {
+    background-image: url("imagenes/fondonubes.png");
+    background-repeat: repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 50%;
+}
+
+/* ------------------ NUEVA VENTANA MODAL (DETALLES) ------------------ */
+.product-card { 
+    cursor: zoom-in; 
+    transition: transform 0.2s ease, shadow 0.2s ease; 
+}
+
+.product-card:hover { 
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+#detail-modal {
+    backdrop-filter: blur(4px);
+}
+
+.custom-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: var(--sensus-accent);
+    border-radius: 10px;
+}
+
+@keyframes modalFade {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+#detail-modal > div:last-child {
+    animation: modalFade 0.3s ease-out;
+}
+
+/* ------------------ RESPONSIVE ------------------ */
+@media (max-width: 1024px) {
+    body.bg-index, body.bg-oficial, body.bg-nubes {
+        background-size: 70%;
+    }
+}
+
+@media (max-width: 640px) {
+    body.bg-index, body.bg-oficial, body.bg-nubes {
+        background-size: 120%;
+        background-attachment: scroll; 
+    }
+
+    #detail-modal img {
+        max-height: 250px;
+        object-fit: contain;
+    }
+}
+
+/* ------------------ SCROLLBAR GENERAL ------------------ */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--sensus-cream);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--sensus-accent);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--sensus-light);
+}
+
+/* ------------------ AJUSTES VARIOS ------------------ */
+nav svg {
+    stroke-width: 2.2;
+}
+
+#mobile-menu {
+    transition: all 0.25s ease-in-out;
+}
+
+.animate-slide-in { 
+    animation: slideIn 0.3s ease-out; 
+}
+
+@keyframes slideIn { 
+    from { transform: translateX(100%); } 
+    to { transform: translateX(0); } 
+}
+
+/* ------------------ CARRUSEL ------------------ */
+.carousel-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.8s ease-in-out;
+}
+
+  :root {
+            --sensus-dark: #004d61;
+            --sensus-light: #1a6b80;
+            --sensus-accent: #03858f;
+        }
+        
+        /* Ajuste para que el fondo general se vea nítido */
+        body {
+            background-size: 400px;
+        }
+
+        /* Estilo de "Cristal" (Glassmorphism) para las tarjetas principales */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+        }
+        
+        /* Efecto para Misión/Visión */
+        .border-t-thick {
+            border-top-width: 6px;
+        }
+
+        /* Estilo beige suave con desenfoque para Áreas Centrales */
+        .glass-crema {
+            background: rgba(245, 246, 240, 0.9);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
